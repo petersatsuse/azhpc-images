@@ -40,6 +40,8 @@ rm -rf nccl-${NCCL_VERSION} $TARBALL
 
 # Install the nccl rdma sharp plugin
 # we need the packages: autoconf automake libtool rdma-core-devel
+# @@@ I wonder if this makes sense, sharp only works with MLNX's driver
+# @@@ This is why it has not been installed/started in an earlier script.
 mkdir -p /usr/local/nccl-rdma-sharp-plugins
 git clone https://github.com/Mellanox/nccl-rdma-sharp-plugins.git
 pushd nccl-rdma-sharp-plugins
