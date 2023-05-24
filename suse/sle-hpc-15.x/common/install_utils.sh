@@ -93,7 +93,9 @@ zypper install -y \
     automake \
     libtool \
     nfs-client \
-    jq
+    jq \
+    rdma-core-devel \
+    wget
 
 # Install azcopy tool
 ## To copy blobs or files to or from a storage account.
