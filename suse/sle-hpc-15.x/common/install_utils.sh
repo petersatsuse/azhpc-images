@@ -1,6 +1,25 @@
 #!/bin/bash
 set -ex
 
+#-------------------------------------------------------------------
+# Container Repository
+#-------------------------------------------------------------------
+# Docker is shipped with SLES by default
+# with SLE HPC we need to enable the Container repository
+SUSEConnect -p sle-module-containers/${SLE_DOTV}/x86_64
+
+#-------------------------------------------------------------------
+# Add SUSE Package Hub
+# byacc is only in packagehub
+SUSEConnect -p PackageHub/${SLE_DOTV}/x86_64
+#-------------------------------------------------------------------
+
+#-------------------------------------------------------------------
+# Nvidia provide certified packages for SLES 15, so we only need to add the repositories and install the packages
+# add the repo key separately beforehand.
+SUSEConnect -p sle-module-NVIDIA-compute/${SLE_MAJOR}/x86_64 --gpg-auto-import-keys
+#-------------------------------------------------------------------
+
 # Install pre-reqs and development tools
 #
 
@@ -26,23 +45,6 @@ zypper --non-interactive modifyrepo --no-refresh oneAPI
 #-------------------------------------------------------------------
 
 #-------------------------------------------------------------------
-# Nvidia provide certified packages for SLES 15, so we only need to add the repositories and install the packages
-#-------------------------------------------------------------------
-# import cuda signing key
-rpm --import $CUDA_PUBKEY_URI
-# CUDA driver (nvidia provides a repo file)
-zypper addrepo -f -g $CUDA_REPO_URI
-# fetch key
-zypper --non-interactive --gpg-auto-import-keys refresh cuda-sles${SLE_MAJOR}-x86_64
-
-#-------------------------------------------------------------------
-# Container Repository
-#-------------------------------------------------------------------
-# Docker is shipped with SLES by default
-# with SLE HPC we need to enable the Container repository
-SUSEConnect -p sle-module-containers/${SLE_DOTV}/x86_64
-
-#-------------------------------------------------------------------
 # Nvidia container repo
 #-------------------------------------------------------------------
 # see https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html
@@ -51,11 +53,6 @@ zypper addrepo -f -g $NVIDIA_CONTAINER_REPO_URI
 # fetch key
 zypper --non-interactive --gpg-auto-import-keys refresh libnvidia-container
 
-#-------------------------------------------------------------------
-# Add SUSE Package Hub
-# byacc is only in packagehub
-SUSEConnect -p PackageHub/${SLE_DOTV}/x86_64
-#-------------------------------------------------------------------
 
 #
 ## SLES HPC ship with many HPC packages already, so no need to build it - simple install is enough
