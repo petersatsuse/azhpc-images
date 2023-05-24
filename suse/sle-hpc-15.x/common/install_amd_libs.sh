@@ -45,4 +45,4 @@ setenv          AMD_FFTW_INCLUDE  ${INSTALL_PREFIX}/include
 EOF
 
 # Create symlinks for modulefiles
-ln -s ${MODULE_FILES_DIRECTORY}/amd/aocl-${AOCL_VERSION} ${MODULE_FILES_DIRECTORY}/amd/aocl
+ln -sf $(readlink --canonicalize ${MODULE_FILES_DIRECTORY}/amd/aocl-${AOCL_VERSION}) ${MODULE_FILES_DIRECTORY}/amd/aocl
