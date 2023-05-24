@@ -23,6 +23,18 @@ set GCC=/usr/bin/gcc
 #
 INSTALL_PREFIX=/opt
 
+# MVAPICH2
+# shipped with SLE HPC
+zypper --non-interactive install -y mvapich2-gnu-hpc
+MV2_VERSION=$(rpm -q  --qf="%{VERSION}" mvapich2-gnu-hpc)
+$COMMON_DIR/write_component_version.sh "MVAPICH2" ${MV2_VERSION}
+
+# OpenMPI 4
+# shipped with SLE HPC
+zypper --non-interactive install -y ${OMPI}-gnu-hpc  lib${OMPI}-gnu-hpc
+OMPI_VERSION=$(rpm -q  --qf="%{VERSION}" ${OMPI}-gnu-hpc)
+$COMMON_DIR/write_component_version.sh "OMPI" ${OMPI_VERSION}
+
 #
 # HPC-X
 TARBALL=$(basename ${HPCX_DOWNLOAD_URL})
@@ -38,18 +50,6 @@ $COMMON_DIR/write_component_version.sh "HPCX" $HPCX_VERSION
 #${HPCX_PATH}/sharp/sbin/sharp_daemons_setup.sh -s -d sharpd
 #systemctl enable sharpd
 #systemctl start sharpd
-
-# MVAPICH2
-# shipped with SLE HPC
-zypper install -y mvapich2-gnu-hpc
-MV2_VERSION=$(rpm -q  --qf="%{VERSION}" mvapich2-gnu-hpc)
-$COMMON_DIR/write_component_version.sh "MVAPICH2" ${MV2_VERSION}
-
-# OpenMPI 4
-# shipped with SLE HPC
-zypper install -y ${OMPI}-gnu-hpc  lib${OMPI}-gnu-hpc
-OMPI_VERSION=$(rpm -q  --qf="%{VERSION}" ${OMPI}-gnu-hpc)
-$COMMON_DIR/write_component_version.sh "OMPI" ${OMPI_VERSION}
 
 # Intel MPI
 # as there are more versions in the repos we need to select one
