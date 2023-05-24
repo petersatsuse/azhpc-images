@@ -25,7 +25,7 @@ tar -xvf ${TARBALL}
 cd aocl-linux-aocc-${AOCL_VERSION}
 ./install.sh -t amd -l blis fftw libflame -i lp64
 cp -r amd/${AOCL_VERSION}/* ${INSTALL_PREFIX}
-cd .. && rm -rf aocl-linux-aocc-${AOCL_VERSION}
+cd .. && rm -rf aocl-linux-aocc-${AOCL_VERSION} ${TARBALL}
 
 $COMMON_DIR/write_component_version.sh "AOCL" ${AOCL_VERSION}
 
