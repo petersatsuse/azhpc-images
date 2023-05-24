@@ -8,7 +8,8 @@
 # #export SLE_DOTV=${VERSION_ID}
 # #export SLE_MAJOR=${VERSION_ID%.*}
 export SLE_DOTV=15.4
-export SLE_MAJOR=15
+export SLE_MAJOR=${SLE_DOTV%%.*}
+export SLE_MINOR=${SLE_DOTV##*.}
 
 # we need the running kernel version to get the right -devel packages
 # PAYG SLES and SLE HPC use kernel-azure by default
