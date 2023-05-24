@@ -35,7 +35,7 @@ $COMMON_DIR/write_component_version.sh "NVIDIA" ${NVIDIA_VERSION}
 
 # Post-install tasks (version its set through 'alternatives')
 echo 'export PATH=$PATH:/usr/local/cuda/bin' | tee -a /etc/bash.bashrc.local
-echo 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/lib64' | tee -a /etc/bash.bashrc.local
+echo '/usr/local/cuda/lib64' | tee /etc/ld.so.conf.d/cuda.conf
 
 # start the fabricmanager - needed for run-tests on ND96asr_v4
 # systemctl start nvidia-fabricmanager.service
