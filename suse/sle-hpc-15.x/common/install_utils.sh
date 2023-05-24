@@ -70,8 +70,8 @@ zypper install -y \
     byacc \
     atk \
     m4 \
-    kernel-azure-devel = ${KERNEL_VERSION} \
-    kernel-source-azure = ${KERNEL_VERSION} \
+    ${KERNEL_VERSION:+kernel-azure-devel = ${KERNEL_VERSION}} \
+    ${KERNEL_VERSION:+kernel-source-azure = ${KERNEL_VERSION}} \
     fuse \
     cmake \
     libarchive13 \
