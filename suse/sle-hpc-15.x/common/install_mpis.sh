@@ -109,14 +109,15 @@ module load gnu/7 openmpi/${OMPI_VERSION}
 EOF
 
 # Intel oneAPI
-# the oneapi provides its own modulefiles
-ln -s $INTELLIBS/mpi/${INTEL_ONE_MPI_VERSION}/modulefiles/mpi ${MODULE_FILES_DIRECTORY}/mpi/impi-${IMPI_MAJOR}
+# oneapi provides its own modulefiles
+ln -sf  $(readlink --canonicalize $INTELLIBS/mpi/${INTEL_ONE_MPI_VERSION}/modulefiles/mpi) ${MODULE_FILES_DIRECTORY}/mpi/impi_${INTEL_ONE_MPI_VERSION}
 
 
 # # Create symlinks for modulefiles
-ln -s ${MODULE_FILES_DIRECTORY}/mpi/hpcx-${HPCX_VERSION} ${MODULE_FILES_DIRECTORY}/mpi/hpcx
-ln -s ${MODULE_FILES_DIRECTORY}/mpi/mvapich2-${MV2_VERSION} ${MODULE_FILES_DIRECTORY}/mpi/mvapich2
-ln -s ${MODULE_FILES_DIRECTORY}/mpi/openmpi-${OMPI_VERSION} ${MODULE_FILES_DIRECTORY}/mpi/openmpi
+ln -sf  $(readlink --canonicalize ${MODULE_FILES_DIRECTORY}/mpi/hpcx-${HPCX_VERSION}) ${MODULE_FILES_DIRECTORY}/mpi/hpcx
+ln -sf  $(readlink --canonicalize ${MODULE_FILES_DIRECTORY}/mpi/mvapich2-${MV2_VERSION}) ${MODULE_FILES_DIRECTORY}/mpi/mvapich2
+ln -sf  $(readlink --canonicalize ${MODULE_FILES_DIRECTORY}/mpi/openmpi-${OMPI_VERSION}) ${MODULE_FILES_DIRECTORY}/mpi/openmpi
+ln -sf  $(readlink --canonicalize ${MODULE_FILES_DIRECTORY}/mpi/impi_${INTEL_ONE_MPI_VERSION}) ${MODULE_FILES_DIRECTORY}/mpi/impi-${IMPI_MAJOR}
 
 # cleanup downloaded tarballs and other installation files/folders
 rm -rf *.tar.gz *offline.sh
