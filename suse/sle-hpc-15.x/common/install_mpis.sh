@@ -42,6 +42,7 @@ HPCX_FOLDER=$(basename ${HPCX_DOWNLOAD_URL} .tbz)
 # the web page said checksum is md5 but in reality is sha256
 $COMMON_DIR/download_and_verify.sh ${HPCX_DOWNLOAD_URL} ${HPCX_CHKSUM}
 tar -xvf ${TARBALL}
+rm -rf ${INSTALL_PREFIX}/${HPCX_FOLDER}
 mv ${HPCX_FOLDER} ${INSTALL_PREFIX}
 HPCX_PATH=${INSTALL_PREFIX}/${HPCX_FOLDER}
 $COMMON_DIR/write_component_version.sh "HPCX" $HPCX_VERSION
@@ -62,7 +63,7 @@ $COMMON_DIR/write_component_version.sh "HPCX" $HPCX_VERSION
 # we forced to use
 zypper install -y -l intel-oneapi-mpi-${INTEL_ONE_MPI_VERSION}
 # Create modulesfiles
-/opt/intel/oneapi/modulefiles-setup.sh
+/opt/intel/oneapi/modulefiles-setup.sh --force
 $COMMON_DIR/write_component_version.sh "IMPI_${IMPI_MAJOR}" ${INTEL_ONE_MPI_VERSION}
 
 #
