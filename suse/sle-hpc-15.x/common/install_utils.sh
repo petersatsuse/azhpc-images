@@ -104,5 +104,6 @@ tar -xvf ${AZTARBALL}
 ## copy the azcopy to the bin path - better would be ${LOCALBIN}
 mv azcopy_linux_amd64_${AZVERSION}/azcopy ${LOCALBIN}
 chmod +x ${LOCALBIN}/azcopy
+$COMMON_DIR/write_component_version.sh "azcopy" ${AZCOPY_VERSION}
 ## remove azcopy tarball
 rm -rf *.tar.gz
