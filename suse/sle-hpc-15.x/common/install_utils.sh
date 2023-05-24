@@ -60,8 +60,7 @@ zypper --non-interactive --gpg-auto-import-keys refresh libnvidia-container
 ## SLES HPC ship with many HPC packages already, so no need to build it - simple install is enough
 #
 # Install base compiler (this will pull in packages for HPC and Lmod as well)
-zypper in -y gnu-compilers-hpc
-
+zypper --non-interactive in -y gnu-compilers-hpc-devel
 
 #
 # If you run kernel-default remove "-azure" from the kernel package names below
@@ -71,7 +70,6 @@ zypper install -y \
     byacc \
     atk \
     m4 \
-    binutils \
     kernel-azure-devel = ${KERNEL_VERSION} \
     kernel-source-azure = ${KERNEL_VERSION} \
     fuse \
