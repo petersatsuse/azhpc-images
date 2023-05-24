@@ -62,9 +62,6 @@ zypper --non-interactive --gpg-auto-import-keys refresh libnvidia-container
 # Install base compiler (this will pull in packages for HPC and Lmod as well)
 zypper in -y gnu-compilers-hpc
 
-## Lmod is an advanced environment module system that allows the installation of multiple versions of a program or shared library, and helps configure the system environment for the use of a specific version.
-## the modulefile path is /usr/share/lmod/modulefiles
-source /usr/share/lmod/lmod/init/bash
 
 #
 # If you run kernel-default remove "-azure" from the kernel package names below
