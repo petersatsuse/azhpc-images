@@ -102,9 +102,7 @@ zypper install -y \
 wget ${AZCOPY_DOWNLOAD_URL}
 tar -xvf ${AZTARBALL}
 ## copy the azcopy to the bin path - better would be ${LOCALBIN}
-pushd azcopy_linux_amd64_${AZVERSION}
-mv azcopy ${LOCALBIN}
-popd
+mv azcopy_linux_amd64_${AZVERSION}/azcopy ${LOCALBIN}
 chmod +x ${LOCALBIN}/azcopy
 ## remove azcopy tarball
 rm -rf *.tar.gz
