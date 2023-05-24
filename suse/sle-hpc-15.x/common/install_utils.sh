@@ -34,6 +34,7 @@ SUSEConnect -p sle-module-NVIDIA-compute/${SLE_MAJOR}/x86_64 --gpg-auto-import-k
 # import package signing keys
 rpm --import $INTEL_PUBKEY_URI
 # add repository
+zypper -n rr oneAPI &>/dev/null || :
 zypper -n addrepo -f -g $INTEL_REPO_URI oneAPI
 # fetch key
 zypper --non-interactive --gpg-auto-import-keys refresh oneAPI
@@ -49,6 +50,7 @@ zypper --non-interactive modifyrepo --no-refresh oneAPI
 #-------------------------------------------------------------------
 # see https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html
 # Check https://nvidia.github.io/libnvidia-container
+zypper --non-interactive rr libnvidia-container &>/dev/null || :
 zypper addrepo -f -g $NVIDIA_CONTAINER_REPO_URI
 # fetch key
 zypper --non-interactive --gpg-auto-import-keys refresh libnvidia-container
