@@ -70,7 +70,6 @@ $COMMON_DIR/write_component_version.sh "IMPI_${IMPI_MAJOR}" ${INTEL_ONE_MPI_VERS
 # # Setup module files for MPIs
 #
 
-# mkdir -p /usr/share/Modules/modulefiles/mpi/
 mkdir -p $MODULE_FILES_DIRECTORY/mpi/
 
 #
