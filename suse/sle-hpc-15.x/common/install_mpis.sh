@@ -87,14 +87,26 @@ module use ${HPCX_PATH}/modulefiles
 module load hpcx
 EOF
 
-# MVAPICH2 -> already provided by suse package, build with gcc7
-# e.g. /usr/share/lmod/moduledeps/gnu-7/mvapich2/2.3.6
 # libraries are build against gnu-7 and not gnu-11, so we need to have the path hardcoded to gnu-7
-#
-ln -s /usr/share/lmod/moduledeps/gnu-7/mvapich2/${MV2_VERSION} ${MODULE_FILES_DIRECTORY}/mpi/mvapich2-${MV2_VERSION}
+# Cannot use links because we need to load compiler as well.
+# e.g. /usr/share/lmod/moduledeps/gnu-7/mvapich2/2.3.6
+# MVAPICH2 -> already provided by suse package, build with gcc7
+cat <<EOF >> ${MODULE_FILES_DIRECTORY}/mpi/mvapich2-${MV2_VERSION}
+#%Module 1.0
+set version ${MV2_VERSION}
+conflict mpi
+module use /usr/share/lmod/modulefiles
+module load gnu/7 mvapich2/${MV2_VERSION}
+EOF
 
 # OpenMPI -> already provided by suse package, build with gcc7
-ln -s /usr/share/lmod/moduledeps/gnu-7/openmpi/${OMPI_VERSION} ${MODULE_FILES_DIRECTORY}/mpi/openmpi-${OMPI_VERSION}
+cat <<EOF >> ${MODULE_FILES_DIRECTORY}/mpi/openmpi-${OMPI_VERSION}
+#%Module 1.0
+set version ${OMPI_VERSION}
+conflict mpi
+module use /usr/share/lmod/modulefiles
+module load gnu/7 openmpi/${OMPI_VERSION}
+EOF
 
 # Intel oneAPI
 # the oneapi provides its own modulefiles
