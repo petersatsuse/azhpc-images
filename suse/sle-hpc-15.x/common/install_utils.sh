@@ -33,8 +33,9 @@ SUSEConnect -p sle-module-NVIDIA-compute/${SLE_MAJOR}/x86_64 --gpg-auto-import-k
 
 # import package signing keys
 rpm --import $INTEL_PUBKEY_URI
-# add repository
+# delete if exists
 zypper -n rr oneAPI &>/dev/null || :
+# add repository
 zypper -n addrepo -f -g $INTEL_REPO_URI oneAPI
 # fetch key
 zypper --non-interactive --gpg-auto-import-keys refresh oneAPI
@@ -55,6 +56,11 @@ zypper addrepo -f -g $NVIDIA_CONTAINER_REPO_URI
 # fetch key
 zypper --non-interactive --gpg-auto-import-keys refresh libnvidia-container
 
+#-------------------------------------------------------------------
+# Add SUSE Package Hub
+# byacc is only in packagehub
+SUSEConnect -p PackageHub/${SLE_DOTV}/x86_64
+#-------------------------------------------------------------------
 
 #
 ## SLES HPC ship with many HPC packages already, so no need to build it - simple install is enough
@@ -72,6 +78,7 @@ zypper install -y \
     m4 \
     ${KERNEL_VERSION:+kernel-azure-devel = ${KERNEL_VERSION}} \
     ${KERNEL_VERSION:+kernel-source-azure = ${KERNEL_VERSION}} \
+    binutils \
     fuse \
     cmake \
     libarchive13 \
@@ -107,3 +114,4 @@ chmod +x ${LOCALBIN}/azcopy
 $COMMON_DIR/write_component_version.sh "azcopy" ${AZCOPY_VERSION}
 ## remove azcopy tarball and directory
 rm -rf *.tar.gz azcopy_linux_amd64_${AZVERSION}
+

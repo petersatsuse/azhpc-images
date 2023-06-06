@@ -3,6 +3,7 @@ set -ex
 
 # Install docker
 zypper --non-interactive in -y -l docker
+
 DOCKER_VERSION=$(rpm -q --qf="%{VERSION}" docker)
 
 # Ensure the Docker service is running
@@ -12,6 +13,7 @@ systemctl --now enable docker
 #zypper modifyrepo --enable libnvidia-container-experimental
 
 zypper --non-interactive install -y -l --replacefiles nvidia-docker2 nvidia-container-runtime
+
 systemctl restart docker
 
 # Test with

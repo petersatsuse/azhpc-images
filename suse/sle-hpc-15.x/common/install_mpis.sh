@@ -35,7 +35,6 @@ zypper --non-interactive install -y ${OMPI}-gnu-hpc  lib${OMPI}-gnu-hpc
 OMPI_VERSION=$(rpm -q  --qf="%{VERSION}" ${OMPI}-gnu-hpc)
 $COMMON_DIR/write_component_version.sh "OMPI" ${OMPI_VERSION}
 
-#
 # HPC-X
 TARBALL=$(basename ${HPCX_DOWNLOAD_URL})
 HPCX_FOLDER=$(basename ${HPCX_DOWNLOAD_URL} .tbz)
@@ -64,6 +63,7 @@ $COMMON_DIR/write_component_version.sh "HPCX" $HPCX_VERSION
 zypper install -y -l intel-oneapi-mpi-${INTEL_ONE_MPI_VERSION}
 # Create modulesfiles
 /opt/intel/oneapi/modulefiles-setup.sh --force
+
 $COMMON_DIR/write_component_version.sh "IMPI_${IMPI_MAJOR}" ${INTEL_ONE_MPI_VERSION}
 
 #

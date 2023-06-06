@@ -34,6 +34,7 @@ $COMMON_DIR/write_component_version.sh "AOCL" ${AOCL_VERSION}
 mkdir -p ${MODULE_FILES_DIRECTORY}/amd/
 
 cat << EOF >> ${MODULE_FILES_DIRECTORY}/amd/aocl-${AOCL_VERSION}
+
 #%Module 1.0
 #
 #  AOCL
@@ -44,3 +45,4 @@ EOF
 
 # Create symlinks for modulefiles
 ln -sf $(readlink --canonicalize ${MODULE_FILES_DIRECTORY}/amd/aocl-${AOCL_VERSION}) ${MODULE_FILES_DIRECTORY}/amd/aocl
+
