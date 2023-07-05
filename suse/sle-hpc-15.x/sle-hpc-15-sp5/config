@@ -40,9 +40,13 @@ export AZCOPY_DOWNLOAD_URL="https://azcopyvnext.azureedge.net/${RELEASE_TAG}/${A
 
 # HPC-X
 # pls accept the EULA
-export HPCX_VERSION="2.12"
-export HPCX_DOWNLOAD_URL=https://content.mellanox.com/hpc/hpc-x/v${HPCX_VERSION}/hpcx-v${HPCX_VERSION}-gcc-inbox-suse${SLE_DOTV}-cuda11-gdrcopy2-nccl${HPCX_VERSION}-x86_64.tbz
-export HPCX_CHKSUM="bc315d3b485d13c97cd174ef5c9cba5c2fa1fbc3e5175f96f1a406a6c0699bdb"
+#export HPCX_VERSION="2.12"
+#export HPCX_DOWNLOAD_URL=https://content.mellanox.com/hpc/hpc-x/v${HPCX_VERSION}/hpcx-v${HPCX_VERSION}-gcc-inbox-suse${SLE_DOTV}-cuda11-gdrcopy2-nccl${HPCX_VERSION}-x86_64.tbz
+#export HPCX_CHKSUM="bc315d3b485d13c97cd174ef5c9cba5c2fa1fbc3e5175f96f1a406a6c0699bdb"
+export HPCX_VERSION="2.15"
+export HPCX_DOWNLOAD_URL=https://hpcx-v2.15-gcc-inbox-suse15.4-cuda12-gdrcopy2-nccl2.17-x86_64.tbz
+export HPCX_CHKSUM="41442adb43de967f22e7583b80a5564dd5db1b651ba6d34fc6597cc3ee665784"
+
 # URL need to be changed if you do not use the inbox drivers and want use MLNX_OFED
 #export HPCX_DOWNLOAD_URL=https://content.mellanox.com/hpc/hpc-x/v${HPCX_VERSION}/hpcx-v${HPCX_VERSION}-gcc-MLNX_OFED_LINUX-5-suse${SLE_DOTV}-cuda11-gdrcopy2-nccl${HPCX_VERSION}-x86_64.tbz
 #export HPCX_CHKSUM="295376818a596b39196ca3843f4b5fc9e0607e50b0a0f96b4b97907af5f45fcb"
