@@ -56,12 +56,6 @@ zypper addrepo -f -g $NVIDIA_CONTAINER_REPO_URI
 # fetch key
 zypper --non-interactive --gpg-auto-import-keys refresh libnvidia-container
 
-#-------------------------------------------------------------------
-# Add SUSE Package Hub
-# byacc is only in packagehub
-SUSEConnect -p PackageHub/${SLE_DOTV}/x86_64
-#-------------------------------------------------------------------
-
 #
 ## SLES HPC ship with many HPC packages already, so no need to build it - simple install is enough
 #
@@ -114,4 +108,3 @@ chmod +x ${LOCALBIN}/azcopy
 $COMMON_DIR/write_component_version.sh "azcopy" ${AZCOPY_VERSION}
 ## remove azcopy tarball and directory
 rm -rf *.tar.gz azcopy_linux_amd64_${AZVERSION}
-
