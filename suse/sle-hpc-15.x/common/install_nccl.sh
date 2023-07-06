@@ -32,9 +32,9 @@ make -j src.build
 
 # build rpm packages
 make pkg.redhat.build
-rpm -i ./build/pkg/rpm/x86_64/libnccl-${NCCL_VERSION}+cuda${CUDA_MAJOR}.${CUDA_MINOR}.x86_64.rpm
-rpm -i ./build/pkg/rpm/x86_64/libnccl-devel-${NCCL_VERSION}+cuda${CUDA_MAJOR}.${CUDA_MINOR}.x86_64.rpm
-rpm -i ./build/pkg/rpm/x86_64/libnccl-static-${NCCL_VERSION}+cuda${CUDA_MAJOR}.${CUDA_MINOR}.x86_64.rpm
+rpm -iF ./build/pkg/rpm/x86_64/libnccl-${NCCL_VERSION}+cuda${CUDA_MAJOR}.${CUDA_MINOR}.x86_64.rpm
+rpm -iF ./build/pkg/rpm/x86_64/libnccl-devel-${NCCL_VERSION}+cuda${CUDA_MAJOR}.${CUDA_MINOR}.x86_64.rpm
+rpm -iF ./build/pkg/rpm/x86_64/libnccl-static-${NCCL_VERSION}+cuda${CUDA_MAJOR}.${CUDA_MINOR}.x86_64.rpm
 popd
 rm -rf nccl-${NCCL_VERSION} $TARBALL
 
@@ -58,6 +58,7 @@ git clone https://github.com/NVIDIA/nccl-tests.git
 pushd nccl-tests
 make MPI=1 MPI_HOME=${HPCX_MPI_DIR} CUDA_HOME=/usr/local/cuda
 popd
+rm -rf /opt/nccl-tests
 mv nccl-tests /opt
 module purge
 popd
