@@ -41,15 +41,18 @@ HPCX_FOLDER=$(basename ${HPCX_DOWNLOAD_URL} .tbz)
 # the web page said checksum is md5 but in reality is sha256
 $COMMON_DIR/download_and_verify.sh ${HPCX_DOWNLOAD_URL} ${HPCX_CHKSUM}
 tar -xvf ${TARBALL}
+# clear previous install
 rm -rf ${INSTALL_PREFIX}/${HPCX_FOLDER}
 mv ${HPCX_FOLDER} ${INSTALL_PREFIX}
 HPCX_PATH=${INSTALL_PREFIX}/${HPCX_FOLDER}
 $COMMON_DIR/write_component_version.sh "HPCX" $HPCX_VERSION
+# cleanup tarball
+rm $TARBALL
 
 # Enable Sharpd
-#${HPCX_PATH}/sharp/sbin/sharp_daemons_setup.sh -s -d sharpd
-#systemctl enable sharpd
-#systemctl start sharpd
+#${HPCX_PATH}/sharp/sbin/sharp_daemons_setup.sh -s -d sharp_am
+#systemctl enable sharp_am
+#systemctl start sharp_am
 
 # Intel MPI
 # as there are more versions in the repos we need to select one
@@ -117,7 +120,3 @@ ln -sf  $(readlink --canonicalize ${MODULE_FILES_DIRECTORY}/mpi/hpcx-${HPCX_VERS
 ln -sf  $(readlink --canonicalize ${MODULE_FILES_DIRECTORY}/mpi/mvapich2-${MV2_VERSION}) ${MODULE_FILES_DIRECTORY}/mpi/mvapich2
 ln -sf  $(readlink --canonicalize ${MODULE_FILES_DIRECTORY}/mpi/openmpi-${OMPI_VERSION}) ${MODULE_FILES_DIRECTORY}/mpi/openmpi
 ln -sf  $(readlink --canonicalize ${MODULE_FILES_DIRECTORY}/mpi/impi_${INTEL_ONE_MPI_VERSION}) ${MODULE_FILES_DIRECTORY}/mpi/impi-${IMPI_MAJOR}
-
-# cleanup downloaded tarballs and other installation files/folders
-rm -rf *.tar.gz *offline.sh
-rm -rf -- */
