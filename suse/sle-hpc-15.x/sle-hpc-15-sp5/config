@@ -6,21 +6,23 @@
 
 # #source /etc/os-release
 # #export SLE_DOTV=${VERSION_ID}
-# #export SLE_MAJOR=${VERSION_ID%.*}
 export SLE_DOTV=15.5
 export SLE_MAJOR=${SLE_DOTV%%.*}
 export SLE_MINOR=${SLE_DOTV##*.}
 
 
 # we need the running kernel version to get the right -devel packages
-# PAYG SLES and SLE HPC use kernel-azure by default
-# BYOS has kernel-default by default, so pls. replace name below if you use BYOS images
-export KERNEL_VERSION=$(rpm -q  --qf="%{VERSION}-%{RELEASE}" kernel-azure)
+# PAYG SLES and SLE HPC use kernel-azure by default installed
+# All BYOS images have kernel-default by default installed
+# so pls. replace the flavor depending on your usecase ("azure" or "default")
+export KERNEL_FLAVOR="azure"
+#
+export KERNEL_VERSION=$(rpm -q  --qf="%{VERSION}-%{RELEASE}" kernel-${KERNEL_FLAVOR})
 [[ $KERNEL_VERSION =~ "is not" ]] && KERNEL_VERSION=
 
 
 # GNU compiler version
-export GNU_COMPILER_VERSION=11
+export GNU_COMPILER_VERSION=12
 
 # SUSE uses lmod
 export MODULE_FILES_DIRECTORY=/usr/share/lmod/modulefiles
@@ -31,8 +33,8 @@ export LOCALDIR=/usr/local
 export LOCALBIN=${LOCALDIR}/bin
 
 # azcopy
-export AZVERSION="10.16.2"
-RELEASE_TAG="release20221108"
+export AZVERSION="10.17.0"
+RELEASE_TAG="release20230123"
 #
 export AZTARBALL="azcopy_linux_amd64_${AZVERSION}.tar.gz"
 export AZCOPY_DOWNLOAD_URL="https://azcopyvnext.azureedge.net/${RELEASE_TAG}/${AZTARBALL}"
@@ -44,7 +46,8 @@ export AZCOPY_DOWNLOAD_URL="https://azcopyvnext.azureedge.net/${RELEASE_TAG}/${A
 #export HPCX_DOWNLOAD_URL=https://content.mellanox.com/hpc/hpc-x/v${HPCX_VERSION}/hpcx-v${HPCX_VERSION}-gcc-inbox-suse${SLE_DOTV}-cuda11-gdrcopy2-nccl${HPCX_VERSION}-x86_64.tbz
 #export HPCX_CHKSUM="bc315d3b485d13c97cd174ef5c9cba5c2fa1fbc3e5175f96f1a406a6c0699bdb"
 export HPCX_VERSION="2.15"
-export HPCX_DOWNLOAD_URL=https://hpcx-v2.15-gcc-inbox-suse15.4-cuda12-gdrcopy2-nccl2.17-x86_64.tbz
+# there is not 15.5 available as of today July2023
+export HPCX_DOWNLOAD_URL=https://content.mellanox.com/hpc/hpc-x/v${HPCX_VERSION}/hpcx-v${HPCX_VERSION}-gcc-inbox-suse15.4-cuda12-gdrcopy2-nccl2.17-x86_64.tbz
 export HPCX_CHKSUM="41442adb43de967f22e7583b80a5564dd5db1b651ba6d34fc6597cc3ee665784"
 
 # URL need to be changed if you do not use the inbox drivers and want use MLNX_OFED
@@ -59,22 +62,21 @@ export HPCX_CHKSUM="41442adb43de967f22e7583b80a5564dd5db1b651ba6d34fc6597cc3ee66
 export CUDA_PUBKEY_URI=https://developer.download.nvidia.com/compute/cuda/repos/sles${SLE_MAJOR}/x86_64/D42D0685.pub
 export CUDA_REPO_URI=https://developer.download.nvidia.com/compute/cuda/repos/sles${SLE_MAJOR}/x86_64/cuda-sles${SLE_MAJOR}.repo
 # Version need to be with dot
-export CUDA_VERSION="11.8"
+export CUDA_VERSION="12.1"
 
 ## NVIDIA DRIVER
-export NVIDIA_VERSION="525.85.12"
+export NVIDIA_VERSION="525.125.06"
 
 ## NVIDIA CONTAINER
 ## see https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html
 export NVIDIA_CONTAINER_REPO_URI=https://nvidia.github.io/libnvidia-container/sles15.3/libnvidia-container.repo
 
 ## NVIDIA DATACENTER MGR
-export DCGM_VERSION="1:3.1.6"
+export DCGM_VERSION="1:3.1.8"
 
 # NCCL
-# actual is v2.17.1-1 (march 2023)
 # v2.16.2-1 does support CUDA 12, and drop Kepler (sm_35)
-export NCCL_VERSION="2.15.1-1" # for cuda-11.8
+export NCCL_VERSION="2.18.3-1" # for cuda-12.x
 export NCCL_DOWNLOAD_URL=https://github.com/NVIDIA/nccl/archive/refs/tags/v${NCCL_VERSION}.tar.gz
 
 # IBDEV2NETDEV
