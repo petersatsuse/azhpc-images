@@ -54,11 +54,11 @@ rm -rf nccl-rdma-sharp-plugins
 # Build the nccl tests
 source /etc/profile.d/lmod.sh
 module load mpi/hpcx
+rm -rf /opt/nccl-tests
 git clone https://github.com/NVIDIA/nccl-tests.git
 pushd nccl-tests
 make MPI=1 MPI_HOME=${HPCX_MPI_DIR} CUDA_HOME=/usr/local/cuda
 popd
-rm -rf /opt/nccl-tests
 mv nccl-tests /opt
 module purge
 popd
