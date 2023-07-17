@@ -68,8 +68,6 @@ zypper install -y \
     byacc \
     atk \
     m4 \
-    ${KERNEL_VERSION:+kernel-${KERNEL_FLAVOR}-devel = ${KERNEL_VERSION}} \
-    ${KERNEL_VERSION:+kernel-source-${KERNEL_FLAVOR} = ${KERNEL_VERSION}} \
     binutils \
     fuse \
     cmake \
