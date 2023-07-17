@@ -8,7 +8,7 @@ source ./config
 source ./set_properties.sh
 
 # SLE version specific fixes
-./fixes.sh
+#./fixes.sh
 
 # install utils
 ../common/install_utils.sh
@@ -67,4 +67,3 @@ rm -rf -- */
 #
 #/usr/sbin/clone-master-clean-up
 #/usr/sbin/waagent -force -deprovision+user && export HISTSIZE=0 && sync
-
