@@ -59,7 +59,7 @@ zypper --non-interactive --gpg-auto-import-keys refresh libnvidia-container
 #
 ## Install all available security fixes
 #
-zypper patch --severity critical,important --category security
+zypper --non-interactive patch --severity critical,important --category security
 
 ## SLES HPC ship with many HPC packages already, so no need to build it - simple install is enough
 #
