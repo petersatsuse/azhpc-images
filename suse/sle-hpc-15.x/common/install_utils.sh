@@ -57,7 +57,7 @@ zypper addrepo -f -g $NVIDIA_CONTAINER_REPO_URI
 zypper --non-interactive --gpg-auto-import-keys refresh libnvidia-container
 
 #
-## Install all available security fixes
+## Install all available security fixes, interactive patches (e.g. need reboot or licence) are not installed
 #
 zypper --non-interactive patch --severity critical,important --category security
 
