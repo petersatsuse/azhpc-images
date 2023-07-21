@@ -17,9 +17,8 @@ export SLE_MINOR=${SLE_DOTV##*.}
 # so pls. replace the flavor depending on your usecase ("azure" or "default")
 export KERNEL_FLAVOR="azure"
 #
-export KERNEL_VERSION=$(rpm -q  --qf="%{VERSION}-%{RELEASE}" kernel-${KERNEL_FLAVOR})
-[[ $KERNEL_VERSION =~ "is not" ]] && KERNEL_VERSION=
-
+#export KERNEL_VERSION=$(rpm -q  --qf="%{VERSION}-%{RELEASE}" kernel-${KERNEL_FLAVOR})
+export KERNEL_VERSION=$(basename $(uname -r) -${KERNEL_FLAVOR})
 
 # GNU compiler version
 export GNU_COMPILER_VERSION=12
