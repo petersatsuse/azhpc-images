@@ -51,7 +51,7 @@ zypper --non-interactive modifyrepo --no-refresh oneAPI
 #-------------------------------------------------------------------
 # see https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html
 # Check https://nvidia.github.io/libnvidia-container
-zypper --non-interactive rr libnvidia-container &>/dev/null || :
+zypper --non-interactive rr libnvidia-container libnvidia-container-experimental &>/dev/null || :
 zypper addrepo -f -g $NVIDIA_CONTAINER_REPO_URI
 # fetch key
 zypper --non-interactive --gpg-auto-import-keys refresh libnvidia-container
