@@ -63,15 +63,13 @@ zypper --non-interactive --gpg-auto-import-keys refresh libnvidia-container
 zypper --non-interactive in -y gnu-compilers-hpc-devel
 
 #
-# If you run kernel-default remove "-azure" from the kernel package names below
+# other packages we my need
 #
 zypper install -y \
     numactl \
     byacc \
     atk \
     m4 \
-    ${KERNEL_VERSION:+kernel-azure-devel = ${KERNEL_VERSION}} \
-    ${KERNEL_VERSION:+kernel-source-azure = ${KERNEL_VERSION}} \
     binutils \
     fuse \
     cmake \
@@ -105,6 +103,6 @@ tar -xvf ${AZTARBALL}
 ## copy the azcopy to the bin path - better would be ${LOCALBIN}
 mv azcopy_linux_amd64_${AZVERSION}/azcopy ${LOCALBIN}
 chmod +x ${LOCALBIN}/azcopy
-$COMMON_DIR/write_component_version.sh "azcopy" ${AZCOPY_VERSION}
+$COMMON_DIR/write_component_version.sh "azcopy" ${AZVERSION}
 ## remove azcopy tarball and directory
 rm -rf *.tar.gz azcopy_linux_amd64_${AZVERSION}

@@ -1,8 +1,17 @@
 #!/bin/bash
 set -ex
 
+# get the right kernel packages for Nvidia install
+zypper install -y ${KERNEL_VERSION:+kernel-${KERNEL_FLAVOR}-devel = ${KERNEL_VERSION}}
+if [ ${KERNEL_FLAVOR} == "azure" ]
+then
+   zypper install -y ${KERNEL_VERSION:+kernel-source-azure = ${KERNEL_VERSION}}
+else
+   zypper install -y ${KERNEL_VERSION:+kernel-source = ${KERNEL_VERSION}}
+fi
+
 #
-## Nvidia provide certified packages for SLES 15 SP4, so we only need to add the repositories and install the packages
+## Nvidia provide certified packages for SLES 15, so we only need to add the repositories and install the packages
 #
 DRIVER_BRANCH_VERSION=${NVIDIA_VERSION%.*.*} # branch is like main version e.g. 525 from 525.85.12
 CUDA_DASH_VERSION=${CUDA_VERSION/./-}
@@ -29,7 +38,7 @@ CUDA_DASH_VERSION=${CUDA_VERSION/./-}
 # Don't install cuda-drivers: this introduces X11 and Wayland - instead install nvidia-computeGXX
 # Don't install cuda-toolkit: this introduces visualization tools
 # - instead install cuda-compilers, cuda-command-line-tools, gds-tools and cuda_libraries
-zypper -n install -y -l --no-recommends cuda-toolkit-${CUDA_DASH_VERSION} cuda-compiler-${CUDA_DASH_VERSION} cuda-command-line-tools-${CUDA_DASH_VERSION} gds-tools-${CUDA_DASH_VERSION} cuda-libraries-${CUDA_DASH_VERSION}  nvidia-fabric-manager = ${NVIDIA_VERSION} "nvidia-gfxG05-kmp-azure = ${NVIDIA_VERSION}" "nvidia-computeG05 = ${NVIDIA_VERSION}"
+zypper -n install -y -l --no-recommends cuda-toolkit-${CUDA_DASH_VERSION} cuda-compiler-${CUDA_DASH_VERSION} cuda-command-line-tools-${CUDA_DASH_VERSION} gds-tools-${CUDA_DASH_VERSION} cuda-libraries-${CUDA_DASH_VERSION}  nvidia-fabric-manager = ${NVIDIA_VERSION} "nvidia-gfxG05-kmp-${KERNEL_FLAVOR} = ${NVIDIA_VERSION}" "nvidia-computeG05 = ${NVIDIA_VERSION}"
 
 
 $COMMON_DIR/write_component_version.sh "CUDA" ${CUDA_VERSION}

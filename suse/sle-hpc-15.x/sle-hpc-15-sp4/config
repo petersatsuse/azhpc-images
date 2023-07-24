@@ -15,7 +15,11 @@ export SLE_MINOR=${SLE_DOTV##*.}
 # we need the running kernel version to get the right -devel packages
 # PAYG SLES and SLE HPC use kernel-azure by default
 # BYOS has kernel-default by default, so pls. replace name below if you use BYOS images
-export KERNEL_VERSION=$(rpm -q  --qf="%{VERSION}-%{RELEASE}" kernel-azure)
+# so pls. replace the flavor depending on your usecase ("azure" or "default")
+export KERNEL_FLAVOR="azure"
+#export KERNEL_FLAVOR="default"
+
+export KERNEL_VERSION=$(basename $(uname -r) -${KERNEL_FLAVOR})
 [[ $KERNEL_VERSION =~ "is not" ]] && KERNEL_VERSION=
 
 
