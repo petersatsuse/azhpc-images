@@ -10,7 +10,7 @@ set -ex
 # wrong cmd: useradd -r -M -s /usr/sbin/nologin ${serviceUser}
 # right cmd: useradd -r -M -U -s /usr/sbin/nologin ${serviceUser}
 # see: man useradd
-# bug reported to Nvidia
+# bug reported to Nvidia, solved with version 1.3.7
 serviceUser="nvidia-dcgm"
 
 #check if user exists, if not create it
