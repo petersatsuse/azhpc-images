@@ -5,7 +5,7 @@ set -ex
 # Optimized primitives for inter-GPU communication.
 
 # add rpm build tools
-zypper install -y -l rpm-build rpmdevtools git
+zypper install -y -l rpm-build git
 
 CUDA_MAJOR=$( echo ${CUDA_VERSION} | cut -d "." -f 1)
 CUDA_MINOR=$( echo ${CUDA_VERSION} | cut -d "." -f 2)
