@@ -62,7 +62,9 @@ zypper --non-interactive --gpg-auto-import-keys refresh libnvidia-container
 # Install base compiler (this will pull in packages for HPC and Lmod as well)
 zypper --non-interactive in -y gnu-compilers-hpc-devel
 
-## Install all available security fixes
+#
+## Install all available security fixes, interactive patches (need reboot or licence) are not installed!
+## Interactive patch need to be installed before running the script, as they mostly need a reboot.
 #
 zypper --non-interactive patch --severity critical,important --category security
 
