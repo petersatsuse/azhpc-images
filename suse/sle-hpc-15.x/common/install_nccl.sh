@@ -36,7 +36,6 @@ rpm -iF ./build/pkg/rpm/x86_64/libnccl-${NCCL_VERSION}+cuda${CUDA_MAJOR}.${CUDA_
 rpm -iF ./build/pkg/rpm/x86_64/libnccl-devel-${NCCL_VERSION}+cuda${CUDA_MAJOR}.${CUDA_MINOR}.x86_64.rpm
 rpm -iF ./build/pkg/rpm/x86_64/libnccl-static-${NCCL_VERSION}+cuda${CUDA_MAJOR}.${CUDA_MINOR}.x86_64.rpm
 popd
-rm -rf nccl-${NCCL_VERSION} $TARBALL
 
 # Install the nccl rdma sharp plugin
 # we need the packages: autoconf automake libtool rdma-core-devel
