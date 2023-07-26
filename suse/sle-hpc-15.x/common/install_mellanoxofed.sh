@@ -1,8 +1,10 @@
 #!/bin/bash
 set -ex
 
-# SLES comes with mellanox inbox (kernel) drivers by default, so no need to install anything
-#
+# SLES comes with mellanox inbox (kernel) drivers by default, so no need to install drivers
+# the only thing are additional tools
+# see https://docs.nvidia.com/networking/display/SLES15SP4/Important+Packages+and+Their+Installation
+zypper install -y rdma-core-devel libibmad5 opensm ibutils infiniband-diags perftest mstflint
 
 # the ibdev2netdev is only in the external mellanox package, so we do not have it with inbox drivers
 wget https://raw.githubusercontent.com/Mellanox/container_scripts/master/ibdev2netdev

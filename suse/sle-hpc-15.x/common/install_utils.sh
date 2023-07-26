@@ -83,8 +83,6 @@ zypper install -y \
     libsecret-1-0 \
     libnuma-devel \
     libibverbs-utils \
-    perftest \
-    mstflint \
     bzip2 \
     vim-data \
     clone-master-clean-up \
@@ -99,7 +97,6 @@ zypper install -y \
     libtool \
     nfs-client \
     jq \
-    rdma-core-devel \
     wget
 
 # Install azcopy tool
